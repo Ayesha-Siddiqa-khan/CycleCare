@@ -23,7 +23,12 @@ resource "aws_iam_role" "github_actions_oidc" {
         Condition = {
           StringEquals = {
             "token.actions.githubusercontent.com:aud" = var.github_oidc_audience
-            "token.actions.githubusercontent.com:sub" = "repo:${var.github_repository}:ref:refs/heads/${var.github_branch}"
+          }
+          StringLike = {
+            "token.actions.githubusercontent.com:sub" = [
+              "repo:${var.github_repository != "" ? var.github_repository : "Ayesha-Siddiqa-khan/CycleCare"}:ref:refs/heads/*",
+              "repo:${var.github_repository != "" ? var.github_repository : "Ayesha-Siddiqa-khan/CycleCare"}:*"
+            ]
           }
         }
       }
