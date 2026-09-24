@@ -686,13 +686,17 @@ legend {
   margin: 0;
   cursor: pointer;
   color: #e9d5ff;
+  transition: color 0.2s ease;
 }
 .checks label:hover { color: #ffffff; }
+
+.checks input[type="checkbox"] {
+  accent-color: #10b981;
+}
 
 input[type="checkbox"], input[type="radio"] {
   width: 1.2rem;
   height: 1.2rem;
-  accent-color: #ec4899;
   cursor: pointer;
 }
 
