@@ -92,7 +92,7 @@ jobs:
     name: "☸️ Deploy to Kubernetes"
     needs: deploy-ecr
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && secrets.KUBE_CONFIG_DATA != ''
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -106,6 +106,10 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         run: |
+          if [ -z "$KUBE_CONFIG_DATA" ]; then
+            echo "KUBE_CONFIG_DATA secret is not set, skipping cluster deployment."
+            exit 0
+          fi
           mkdir -p $HOME/.kube
           echo "$KUBE_CONFIG_DATA" | base64 -d > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
