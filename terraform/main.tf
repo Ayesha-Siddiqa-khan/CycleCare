@@ -16,9 +16,9 @@ provider "aws" {
   region = "us-east-1"
   default_tags {
     tags = {
-      Project     = "CycleCare"
-      Environment = "dev"
-      ManagedBy   = "TerraPilot"
+      Project           = "CycleCare"
+      Environment       = "dev"
+      ManagedBy         = "TerraPilot"
       TerraPilotProject = "CycleCare"
     }
   }
