@@ -52,7 +52,7 @@ resource "aws_s3_bucket_ownership_controls" "main" {
 
 # PostgreSQL backup bucket
 resource "aws_s3_bucket" "postgres_backups" {
-  bucket        = var.postgres_backup_bucket_name != "" ? var.postgres_backup_bucket_name : "${local.resource_prefix}-postgres-backups-${random_id.suffix.hex}"
+  bucket        = var.postgres_backup_bucket_name != "" ? lower(var.postgres_backup_bucket_name) : "${local.s3_prefix}-postgres-backups-${random_id.suffix.hex}"
   force_destroy = false
 
   tags = {

@@ -1,7 +1,7 @@
 
 # Bootstrap S3 bucket for EC2 user-data scripts
 resource "aws_s3_bucket" "bootstrap" {
-  bucket        = "${local.resource_prefix}-bootstrap-${random_id.suffix.hex}"
+  bucket        = "${local.s3_prefix}-bootstrap-${random_id.suffix.hex}"
   force_destroy = true
 
   tags = {
@@ -586,7 +586,10 @@ resource "aws_iam_policy" "terrapilot_bootstrap_s3_access" {
           "s3:ListBucket",
           "s3:GetBucketLocation"
         ]
-        Resource = "arn:aws:s3:::${local.resource_prefix}-*"
+        Resource = [
+          "arn:aws:s3:::${local.resource_prefix}-*",
+          "arn:aws:s3:::${local.s3_prefix}-*"
+        ]
       },
       {
         Sid    = "AllowGetBootstrapObjects"
@@ -594,7 +597,10 @@ resource "aws_iam_policy" "terrapilot_bootstrap_s3_access" {
         Action = [
           "s3:GetObject"
         ]
-        Resource = "arn:aws:s3:::${local.resource_prefix}-*/scripts/*"
+        Resource = [
+          "arn:aws:s3:::${local.resource_prefix}-*/scripts/*",
+          "arn:aws:s3:::${local.s3_prefix}-*/scripts/*"
+        ]
       }
     ]
   })

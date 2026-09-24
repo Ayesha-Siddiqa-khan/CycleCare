@@ -43,6 +43,8 @@ logs/
 *.tfstate.*
 *.tfstate.backup
 crash.log
+tfplan
+*.tfplan
 override.tf
 override.tf.json
 *_override.tf
