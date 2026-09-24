@@ -189,8 +189,21 @@ nav a:hover {
 nav a[aria-current="page"] {
   background: var(--accent-gradient);
   color: #fff;
-  box-shadow: 0 4px 15px var(--accent-glow);
+  box-shadow: 0 4px 18px var(--accent-glow), 0 0 10px rgba(217, 70, 239, 0.4);
   font-weight: 700;
+  position: relative;
+  overflow: hidden;
+}
+
+nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  animation: shine-sweep 4s infinite 1s;
 }
 
 /* ---------- typography ---------- */
@@ -250,6 +263,33 @@ a:hover { color: #fbcfe8; text-decoration: underline; }
   margin-bottom: 1.4rem;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shining light sweep effect */
+.card::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(244, 114, 182, 0.15) 50%,
+    rgba(255, 255, 255, 0.08) 65%,
+    transparent 80%
+  );
+  transform: rotate(30deg) translateY(-100%);
+  transition: transform 0.75s ease;
+  pointer-events: none;
+}
+
+.card:hover::after {
+  transform: rotate(30deg) translateY(100%);
 }
 
 .card:hover {
@@ -399,11 +439,35 @@ a:hover { color: #fbcfe8; text-decoration: underline; }
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
   box-shadow: 0 8px 25px var(--accent-glow);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: skewX(-25deg);
+  animation: shine-sweep 3.5s infinite;
+}
+
+@keyframes shine-sweep {
+  0% { left: -100%; }
+  25%, 100% { left: 160%; }
 }
 
 .btn-primary:hover {
   background: linear-gradient(135deg, #f472b6 0%, #e879f9 50%, #a78bfa 100%);
-  box-shadow: 0 12px 30px rgba(236, 72, 153, 0.5);
+  box-shadow: 0 12px 30px rgba(236, 72, 153, 0.6), 0 0 20px rgba(217, 70, 239, 0.4);
   transform: translateY(-2px) scale(1.02);
 }
 
