@@ -906,6 +906,83 @@ input[type="checkbox"], input[type="radio"] {
   color: #ffffff;
 }
 
+/* Delicate contextual card accents matching the pink/purple theme */
+
+/* Diet - Iron & Energy (Warm Berry Rose) */
+.guide-card-iron {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(244, 63, 94, 0.08) 100%);
+  border-color: rgba(244, 63, 94, 0.25);
+}
+.guide-card-iron .guide-icon-badge {
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.35) 0%, rgba(225, 29, 72, 0.18) 100%);
+  border-color: rgba(251, 113, 133, 0.45);
+  color: #f43f5e;
+}
+.guide-card-iron:hover {
+  border-color: rgba(251, 113, 133, 0.6);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(244, 63, 94, 0.25);
+}
+
+/* Diet - Hydration & Water (Gentle Ocean Mint & Lavender) */
+.guide-card-hydration {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(56, 189, 248, 0.07) 100%);
+  border-color: rgba(56, 189, 248, 0.22);
+}
+.guide-card-hydration .guide-icon-badge {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.3) 0%, rgba(168, 85, 247, 0.2) 100%);
+  border-color: rgba(56, 189, 248, 0.45);
+  color: #38bdf8;
+}
+.guide-card-hydration:hover {
+  border-color: rgba(56, 189, 248, 0.55);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(56, 189, 248, 0.22);
+}
+
+/* Diet - Foods to Moderate (Subtle Amber/Rose Alert) */
+.guide-card-limit {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(251, 146, 60, 0.06) 100%);
+  border-color: rgba(251, 146, 60, 0.22);
+}
+.guide-card-limit .guide-icon-badge {
+  background: linear-gradient(135deg, rgba(251, 146, 60, 0.3) 0%, rgba(236, 72, 153, 0.2) 100%);
+  border-color: rgba(251, 146, 60, 0.45);
+  color: #fb923c;
+}
+.guide-card-limit:hover {
+  border-color: rgba(251, 146, 60, 0.55);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(251, 146, 60, 0.2);
+}
+
+/* Precautions - Hygiene & Safety (Clean Emerald Mint & Lavender) */
+.guide-card-hygiene {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(52, 211, 153, 0.06) 100%);
+  border-color: rgba(52, 211, 153, 0.22);
+}
+.guide-card-hygiene .guide-icon-badge {
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.3) 0%, rgba(139, 92, 246, 0.2) 100%);
+  border-color: rgba(52, 211, 153, 0.45);
+  color: #34d399;
+}
+.guide-card-hygiene:hover {
+  border-color: rgba(52, 211, 153, 0.55);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(52, 211, 153, 0.2);
+}
+
+/* Precautions - Comfort & Cramp Relief (Soothing Violet Rose) */
+.guide-card-comfort {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(192, 132, 252, 0.08) 100%);
+  border-color: rgba(192, 132, 252, 0.25);
+}
+.guide-card-comfort .guide-icon-badge {
+  background: linear-gradient(135deg, rgba(192, 132, 252, 0.35) 0%, rgba(236, 72, 153, 0.2) 100%);
+  border-color: rgba(192, 132, 252, 0.5);
+  color: #c084fc;
+}
+.guide-card-comfort:hover {
+  border-color: rgba(192, 132, 252, 0.6);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(192, 132, 252, 0.25);
+}
+
 .card-danger-alert {
   background: linear-gradient(135deg, rgba(220, 38, 38, 0.25) 0%, rgba(139, 92, 246, 0.18) 100%);
   border: 1px solid rgba(248, 113, 113, 0.45);
