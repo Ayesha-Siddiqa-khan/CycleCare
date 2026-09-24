@@ -38,9 +38,36 @@
       <h1>Your Cycle</h1>
 
       <div id="dash-empty" class="card empty" hidden>
-        <p><strong>No periods recorded yet.</strong></p>
-        <p>Add your first period to start tracking your cycle.</p>
-        <p><a class="btn btn-primary" href="#/periods/new">Add Period</a></p>
+        <div class="empty-graphic">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="circleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ec4899" stop-opacity="0.8"/>
+                <stop offset="50%" stop-color="#d946ef" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.7"/>
+              </linearGradient>
+              <linearGradient id="innerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f472b6" />
+                <stop offset="100%" stop-color="#c084fc" />
+              </linearGradient>
+              <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="8" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+            </defs>
+            <circle cx="60" cy="60" r="50" stroke="url(#circleGrad)" stroke-width="3" stroke-dasharray="8 6" opacity="0.6" />
+            <circle cx="60" cy="60" r="40" fill="rgba(236, 72, 153, 0.1)" />
+            <!-- Floating Sparkles -->
+            <path d="M60 28 C60 40 60 40 60 52 M48 40 C60 40 60 40 72 40" stroke="url(#innerGrad)" stroke-width="2.5" stroke-linecap="round" opacity="0.8" />
+            <!-- Center Heart / Cycle Drop -->
+            <path d="M60 46 C60 46 72 58 72 67 C72 74 66.5 79 60 79 C53.5 79 48 74 48 67 C48 58 60 46 60 46 Z" fill="url(#innerGrad)" filter="url(#glow)"/>
+            <circle cx="86" cy="36" r="3" fill="#ec4899" />
+            <circle cx="34" cy="80" r="2.5" fill="#8b5cf6" />
+          </svg>
+        </div>
+        <h2>Track Your Wellness Rhythm</h2>
+        <p>Your records stay completely private in this browser. Log your first cycle to unlock personal estimates and pattern insights.</p>
+        <p><a class="btn btn-primary" href="#/periods/new">✨ Add First Period</a></p>
       </div>
 
       <div id="dash-content" hidden>
@@ -166,9 +193,19 @@
     <section id="page-history" class="page" hidden>
       <h1>Cycle History</h1>
       <div id="history-empty" class="card empty" hidden>
-        <p><strong>No periods recorded yet.</strong></p>
-        <p>Add your first period to start tracking your cycle.</p>
-        <p><a class="btn btn-primary" href="#/periods/new">Add Period</a></p>
+        <div class="empty-graphic">
+          <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="15" width="60" height="70" rx="10" stroke="rgba(255,255,255,0.15)" stroke-width="2" fill="rgba(255,255,255,0.02)"/>
+            <path d="M35 35 H65" stroke="url(#circleGrad)" stroke-width="3" stroke-linecap="round"/>
+            <path d="M35 48 H55" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M35 60 H50" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="70" cy="70" r="14" fill="url(#innerGrad)" />
+            <path d="M66 70 L69 73 L75 67" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2>No Recorded Cycles Yet</h2>
+        <p>Once you log your periods, your complete history, cycle trends, and symptom logs will appear here.</p>
+        <p><a class="btn btn-primary" href="#/periods/new">✨ Add Period</a></p>
       </div>
       <div id="history-list"></div>
     </section>
