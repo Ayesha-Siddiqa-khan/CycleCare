@@ -623,18 +623,53 @@ legend {
   align-items: center;
   font-weight: 500;
   margin: 0;
-  padding: 0.4rem 0.8rem;
-  border-radius: 10px;
+  padding: 0.45rem 0.9rem;
+  border-radius: 12px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.16);
   cursor: pointer;
   color: #ffffff;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .chips label:hover {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: #d946ef;
-  box-shadow: 0 2px 8px rgba(217, 70, 239, 0.25);
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
+}
+
+/* Light Flow: Soft Nature Green */
+.chip-flow.flow-light input[type="radio"] {
+  accent-color: #10b981;
+}
+.chip-flow.flow-light:has(input:checked) {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(5, 150, 105, 0.18) 100%);
+  border-color: #10b981;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
+  color: #ecfdf5;
+  font-weight: 600;
+}
+
+/* Medium Flow: Warm Coral Rose / Light Crimson */
+.chip-flow.flow-medium input[type="radio"] {
+  accent-color: #f43f5e;
+}
+.chip-flow.flow-medium:has(input:checked) {
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.25) 0%, rgba(225, 29, 72, 0.18) 100%);
+  border-color: #f43f5e;
+  box-shadow: 0 4px 16px rgba(244, 63, 94, 0.35);
+  color: #fff1f2;
+  font-weight: 600;
+}
+
+/* Heavy Flow: Rich Deep Crimson Red */
+.chip-flow.flow-heavy input[type="radio"] {
+  accent-color: #dc2626;
+}
+.chip-flow.flow-heavy:has(input:checked) {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.32) 0%, rgba(153, 27, 27, 0.25) 100%);
+  border-color: #ef4444;
+  box-shadow: 0 4px 16px rgba(220, 38, 38, 0.45);
+  color: #ffffff;
+  font-weight: 700;
 }
 
 .checks {
