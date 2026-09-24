@@ -6,6 +6,7 @@
   <title>CycleCare — Private Period &amp; Cycle Tracking</title>
   <meta name="description" content="A private, simple menstrual cycle tracker with estimates, calendar, history, and general wellness guidance.">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -14,18 +15,21 @@
   <header>
     <div class="wrap">
       <div class="brand-row">
-        <a class="brand" href="#/">CycleCare</a>
+        <a class="brand" href="#/">
+          <i data-lucide="sparkles" class="brand-icon"></i>
+          CycleCare
+        </a>
         <span class="tag">private cycle tracking</span>
       </div>
       <nav aria-label="Main">
         <ul>
-          <li><a href="#/" data-nav="dashboard">Dashboard</a></li>
-          <li><a href="#/calendar" data-nav="calendar">Calendar</a></li>
-          <li><a href="#/periods/new" data-nav="periods">Add Period</a></li>
-          <li><a href="#/history" data-nav="history">History</a></li>
-          <li><a href="#/diet" data-nav="diet">Diet &amp; Nutrition</a></li>
-          <li><a href="#/precautions" data-nav="precautions">Precautions</a></li>
-          <li><a href="#/settings" data-nav="settings">Settings</a></li>
+          <li><a href="#/" data-nav="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
+          <li><a href="#/calendar" data-nav="calendar"><i data-lucide="calendar"></i> Calendar</a></li>
+          <li><a href="#/periods/new" data-nav="periods"><i data-lucide="plus-circle"></i> Add Period</a></li>
+          <li><a href="#/history" data-nav="history"><i data-lucide="history"></i> History</a></li>
+          <li><a href="#/diet" data-nav="diet"><i data-lucide="apple"></i> Diet &amp; Nutrition</a></li>
+          <li><a href="#/precautions" data-nav="precautions"><i data-lucide="shield-check"></i> Precautions</a></li>
+          <li><a href="#/settings" data-nav="settings"><i data-lucide="settings"></i> Settings</a></li>
         </ul>
       </nav>
     </div>
@@ -104,10 +108,10 @@
         <div class="card">
           <h2>Quick actions</h2>
           <div class="actions">
-            <a class="btn btn-primary" href="#/periods/new">Add Period</a>
-            <a class="btn" href="#/calendar">Calendar</a>
-            <a class="btn" href="#/diet">Diet &amp; Nutrition</a>
-            <a class="btn" href="#/precautions">Precautions &amp; Self-Care</a>
+            <a class="btn btn-primary" href="#/periods/new"><i data-lucide="plus-circle"></i> Add Period</a>
+            <a class="btn" href="#/calendar"><i data-lucide="calendar"></i> Calendar</a>
+            <a class="btn" href="#/diet"><i data-lucide="apple"></i> Diet &amp; Nutrition</a>
+            <a class="btn" href="#/precautions"><i data-lucide="heart-pulse"></i> Precautions &amp; Self-Care</a>
           </div>
         </div>
       </div>

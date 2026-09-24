@@ -495,6 +495,10 @@ function router() {
   else if (page === "history") renderHistory();
   else if (page === "periods") renderForm(parts[1] === "edit" ? parts[2] : null);
   else if (page === "settings") renderSettings();
+
+  if (typeof lucide !== "undefined" && lucide.createIcons) {
+    lucide.createIcons();
+  }
 }
 
 /* ---------- init ---------- */
