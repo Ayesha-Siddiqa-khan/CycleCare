@@ -214,6 +214,10 @@ generate_kubeconfigs() {
   cp /home/ubuntu/.kube/config-private /home/ubuntu/kubeconfig-private
 
   if [ -n "$public_ip" ]; then
+    rm -f /etc/kubernetes/pki/apiserver.crt /etc/kubernetes/pki/apiserver.key
+    kubeadm init phase certs apiserver --apiserver-cert-extra-sans "$public_ip"
+    crictl stopp $(crictl pods --name kube-apiserver -q) 2>/dev/null || systemctl restart kubelet
+    sleep 3
     cp /home/ubuntu/.kube/config-private /home/ubuntu/.kube/config-public
     kubectl --kubeconfig=/home/ubuntu/.kube/config-public config set-cluster kubernetes --server="https://$${public_ip}:6443"
     cp /home/ubuntu/.kube/config-public /home/ubuntu/kubeconfig-public
