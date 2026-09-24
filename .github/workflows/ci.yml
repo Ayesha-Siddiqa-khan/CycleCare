@@ -96,9 +96,21 @@ jobs:
     needs: deploy-ecr
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      AWS_REGION: ${{ vars.AWS_REGION || 'us-east-1' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_TO_ASSUME || 'arn:aws:iam::257536659737:role/CycleCare-dev-github-actions-oidc' }}
+          aws-region: ${{ env.AWS_REGION }}
+          audience: sts.amazonaws.com
 
       - name: Setup kubectl
         uses: azure/setup-kubectl@v4
@@ -109,12 +121,19 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         run: |
-          if [ -z "$KUBE_CONFIG_DATA" ]; then
-            echo "KUBE_CONFIG_DATA secret is not set, skipping cluster deployment."
+          mkdir -p $HOME/.kube
+          B64_DATA=""
+          if B64_DATA=$(aws ssm get-parameter --name "/cyclecare/dev/kubeconfig-public-b64" --with-decryption --query "Parameter.Value" --output text --region "$AWS_REGION" 2>/dev/null) && [ -n "$B64_DATA" ]; then
+            echo "Successfully retrieved kubeconfig from AWS SSM Parameter Store."
+          elif [ -n "$KUBE_CONFIG_DATA" ]; then
+            echo "Using KUBE_CONFIG_DATA secret fallback."
+            B64_DATA="$KUBE_CONFIG_DATA"
+          else
+            echo "No kubeconfig available from SSM or secret, skipping deployment."
             exit 0
           fi
-          mkdir -p $HOME/.kube
-          echo "$KUBE_CONFIG_DATA" | tr -d '\r\n ' | base64 -d > $HOME/.kube/config
+
+          echo "$B64_DATA" | tr -d '\r\n ' | base64 -d > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
           kubectl cluster-info
           if [ -d "k8s" ]; then
