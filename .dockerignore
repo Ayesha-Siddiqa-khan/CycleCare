@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+.env*
+npm-debug.log*
+Dockerfile
+.dockerignore
+.github
+*.md
+tests.js
+package.json
+package-lock.json

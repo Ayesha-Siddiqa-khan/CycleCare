@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CycleCare — Private Period &amp; Cycle Tracking</title>
+  <meta name="description" content="A private, simple menstrual cycle tracker with estimates, calendar, history, and general wellness guidance.">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header>
+    <div class="wrap">
+      <div class="brand-row">
+        <a class="brand" href="#/">CycleCare</a>
+        <span class="tag">private cycle tracking</span>
+      </div>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="#/" data-nav="dashboard">Dashboard</a></li>
+          <li><a href="#/calendar" data-nav="calendar">Calendar</a></li>
+          <li><a href="#/periods/new" data-nav="periods">Add Period</a></li>
+          <li><a href="#/history" data-nav="history">History</a></li>
+          <li><a href="#/diet" data-nav="diet">Diet &amp; Nutrition</a></li>
+          <li><a href="#/precautions" data-nav="precautions">Precautions</a></li>
+          <li><a href="#/settings" data-nav="settings">Settings</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+
+    <!-- Dashboard -->
+    <section id="page-dashboard" class="page">
+      <h1>Your Cycle</h1>
+
+      <div id="dash-empty" class="card empty" hidden>
+        <p><strong>No periods recorded yet.</strong></p>
+        <p>Add your first period to start tracking your cycle.</p>
+        <p><a class="btn btn-primary" href="#/periods/new">Add Period</a></p>
+      </div>
+
+      <div id="dash-content" hidden>
+        <div class="grid">
+          <div class="card">
+            <h2>Last period</h2>
+            <p id="dash-last" class="big"></p>
+          </div>
+          <div class="card">
+            <h2>Estimated next period</h2>
+            <p id="dash-next" class="big"></p>
+            <p id="dash-until" class="muted"></p>
+            <p class="fineprint">Estimate only — not a guarantee. Cycles naturally vary.</p>
+          </div>
+          <div class="card">
+            <h2>Current status</h2>
+            <p id="dash-status" class="big"></p>
+          </div>
+          <div class="card">
+            <h2>Average cycle length</h2>
+            <p id="dash-avg" class="big"></p>
+            <p id="dash-limited" class="muted"></p>
+          </div>
+        </div>
+
+        <p id="dash-passed" class="notice" role="status" hidden></p>
+
+        <div class="card">
+          <h2>Recent history</h2>
+          <ul id="dash-recent" class="list"></ul>
+          <p><a href="#/history">View all history</a></p>
+        </div>
+
+        <div class="card">
+          <h2>Quick actions</h2>
+          <div class="actions">
+            <a class="btn btn-primary" href="#/periods/new">Add Period</a>
+            <a class="btn" href="#/calendar">Calendar</a>
+            <a class="btn" href="#/diet">Diet &amp; Nutrition</a>
+            <a class="btn" href="#/precautions">Precautions &amp; Self-Care</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calendar -->
+    <section id="page-calendar" class="page" hidden>
+      <h1>Calendar</h1>
+      <div class="card">
+        <div class="cal-header">
+          <button type="button" class="btn btn-icon" id="cal-prev" aria-label="Previous month">&#8249;</button>
+          <h2 id="cal-title" aria-live="polite"></h2>
+          <button type="button" class="btn btn-icon" id="cal-next" aria-label="Next month">&#8250;</button>
+        </div>
+        <div class="cal-grid cal-dow" aria-hidden="true">
+          <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+        </div>
+        <div class="cal-grid" id="cal-days" role="group" aria-labelledby="cal-title"></div>
+        <ul class="legend">
+          <li><span class="swatch swatch-recorded" aria-hidden="true"></span>Recorded period</li>
+          <li><span class="swatch swatch-estimated" aria-hidden="true"></span>Estimated (not guaranteed)</li>
+          <li><span class="swatch swatch-today" aria-hidden="true"></span>Today</li>
+        </ul>
+      </div>
+      <div class="card" id="day-detail" hidden></div>
+    </section>
+
+    <!-- Add / Edit Period -->
+    <section id="page-periods" class="page" hidden>
+      <h1 id="form-title">Add Period</h1>
+      <form id="period-form" class="card form" novalidate>
+        <input type="hidden" id="period-id" value="">
+        <div class="field">
+          <label for="start">Period start date <span class="req" aria-hidden="true">*</span><span class="visually-hidden">(required)</span></label>
+          <input type="date" id="start" name="start" required>
+        </div>
+        <div class="field">
+          <label for="end">Period end date</label>
+          <input type="date" id="end" name="end" aria-describedby="end-hint">
+          <p class="hint" id="end-hint">Leave empty if your period is still ongoing.</p>
+        </div>
+        <p class="err" id="form-err" role="alert"></p>
+
+        <fieldset>
+          <legend>Flow (optional)</legend>
+          <div class="chips">
+            <label><input type="radio" name="flow" value="Light"> Light</label>
+            <label><input type="radio" name="flow" value="Medium"> Medium</label>
+            <label><input type="radio" name="flow" value="Heavy"> Heavy</label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Symptoms (optional)</legend>
+          <div class="checks">
+            <label><input type="checkbox" name="symptoms" value="Cramps"> Cramps</label>
+            <label><input type="checkbox" name="symptoms" value="Headache"> Headache</label>
+            <label><input type="checkbox" name="symptoms" value="Back pain"> Back pain</label>
+            <label><input type="checkbox" name="symptoms" value="Bloating"> Bloating</label>
+            <label><input type="checkbox" name="symptoms" value="Fatigue"> Fatigue</label>
+            <label><input type="checkbox" name="symptoms" value="Mood changes"> Mood changes</label>
+            <label><input type="checkbox" name="symptoms" value="Breast tenderness"> Breast tenderness</label>
+            <label><input type="checkbox" name="symptoms" value="Nausea"> Nausea</label>
+            <label><input type="checkbox" name="symptoms" value="Other"> Other</label>
+          </div>
+          <p class="hint">Personal tracking only — not a diagnosis. Use notes below for details.</p>
+        </fieldset>
+
+        <div class="field">
+          <label for="notes">Notes (optional)</label>
+          <textarea id="notes" name="notes" rows="3"></textarea>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn btn-primary">Save Period</button>
+          <a class="btn" href="#/dashboard">Cancel</a>
+          <button type="button" class="btn btn-danger" id="delete-btn" hidden>Delete</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- History -->
+    <section id="page-history" class="page" hidden>
+      <h1>Cycle History</h1>
+      <div id="history-empty" class="card empty" hidden>
+        <p><strong>No periods recorded yet.</strong></p>
+        <p>Add your first period to start tracking your cycle.</p>
+        <p><a class="btn btn-primary" href="#/periods/new">Add Period</a></p>
+      </div>
+      <div id="history-list"></div>
+    </section>
+
+    <!-- Diet & Nutrition -->
+    <section id="page-diet" class="page" hidden>
+      <h1>Diet &amp; Nutrition</h1>
+      <p class="lede">General wellness guidance only — not medical or dietetic advice. Needs vary from person to person.</p>
+
+      <div class="card">
+        <h2>During Your Period</h2>
+        <ul>
+          <li>Stay hydrated — drink water regularly through the day.</li>
+          <li>Eat balanced meals at regular times, according to your personal needs.</li>
+          <li>Include iron-containing foods, since iron is lost with menstrual blood.</li>
+          <li>Include protein-rich foods.</li>
+          <li>Include a variety of fruits and vegetables.</li>
+          <li>Include fiber-rich foods.</li>
+          <li>Choose nutritious sources of calcium and other essential nutrients.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Foods to Include</h2>
+        <ul>
+          <li>Leafy green vegetables</li>
+          <li>Lentils and beans</li>
+          <li>Eggs</li>
+          <li>Fish or other protein sources</li>
+          <li>Yogurt or other calcium-containing foods</li>
+          <li>Fruits</li>
+          <li>Nuts and seeds</li>
+          <li>Whole grains</li>
+          <li>Iron-containing foods</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Foods to Limit</h2>
+        <p>These are general suggestions, not strict rules. No food is universally forbidden — notice how foods affect how you feel and adjust gently.</p>
+        <ul>
+          <li>Excessively salty foods, if they worsen bloating.</li>
+          <li>Excessive caffeine, if it worsens your symptoms.</li>
+          <li>Highly processed foods when they replace balanced meals.</li>
+          <li>Excessive sugary foods.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Precautions & Self-Care -->
+    <section id="page-precautions" class="page" hidden>
+      <h1>Precautions &amp; Self-Care</h1>
+      <p class="lede">General self-care guidance. What helps varies from person to person and from cycle to cycle.</p>
+
+      <div class="card">
+        <h2>Everyday Self-Care</h2>
+        <ul>
+          <li>Staying hydrated.</li>
+          <li>Getting adequate rest.</li>
+          <li>Gentle physical activity when comfortable.</li>
+          <li>Maintaining personal hygiene.</li>
+          <li>Using suitable menstrual hygiene products.</li>
+          <li>Changing menstrual products according to the manufacturer's instructions and normal hygiene practices.</li>
+          <li>Using warmth for comfort if helpful.</li>
+          <li>Monitoring your symptoms and noting changes from your normal.</li>
+        </ul>
+      </div>
+
+      <div class="card card-important">
+        <h2>When to Seek Medical Advice</h2>
+        <p>CycleCare cannot diagnose anything. A qualified healthcare professional may be appropriate if you experience:</p>
+        <ul>
+          <li>Very heavy or unusual bleeding.</li>
+          <li>Severe or worsening pain.</li>
+          <li>Fainting or significant weakness.</li>
+          <li>Fever or signs of infection.</li>
+          <li>Bleeding between periods that is unusual for you.</li>
+          <li>A significant change from your normal cycle.</li>
+          <li>Symptoms that persist or interfere substantially with daily activities.</li>
+        </ul>
+        <p><strong>If you are concerned about your symptoms, please seek professional medical advice.</strong></p>
+      </div>
+    </section>
+
+    <!-- Settings -->
+    <section id="page-settings" class="page" hidden>
+      <h1>Settings</h1>
+
+      <div class="card">
+        <h2>Cycle Settings</h2>
+        <form id="settings-form" class="form" novalidate>
+          <div class="field">
+            <label for="default-cycle">Default cycle length (days)</label>
+            <input type="number" id="default-cycle" name="default-cycle" min="15" max="60" required aria-describedby="default-hint">
+            <p class="hint" id="default-hint">Used for the next-period estimate until you have recorded enough cycles (15–60).</p>
+          </div>
+          <p class="err" id="settings-err" role="alert"></p>
+          <div class="actions">
+            <button type="submit" class="btn btn-primary">Save Settings</button>
+            <span id="settings-msg" role="status" class="muted"></span>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Privacy</h2>
+        <p>Your period and symptom records are stored only in this browser (local storage). They are never sent to a server, included in URLs, or shared. Clearing your browser data for this site will delete your records.</p>
+      </div>
+
+      <div class="card">
+        <h2>Medical Disclaimer</h2>
+        <p>CycleCare provides general wellness and educational information. It is not a diagnostic or emergency medical service. Estimated dates are not guarantees, and cycles naturally vary. For concerning, unusual, or persistent symptoms, consult a qualified healthcare professional. Do not stop prescribed medication or start treatment based on this app.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="disclaimer">
+    <div class="wrap">
+      <p><strong>Medical disclaimer:</strong> CycleCare provides general wellness and educational information. It is not a diagnostic or emergency medical service. Estimates are not guarantees. For concerning, unusual, or persistent symptoms, consult a qualified healthcare professional.</p>
+      <p><strong>Privacy:</strong> Your records stay in this browser and are never sent to a server.</p>
+    </div>
+  </footer>
+</body>
+</html>
