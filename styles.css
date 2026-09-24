@@ -770,6 +770,88 @@ input[type="checkbox"], input[type="radio"] {
 
 .disclaimer strong { color: #ffffff; }
 
+/* ---------- wellness guide styles ---------- */
+
+.guide-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-bottom: 1.4rem;
+}
+
+.guide-card {
+  padding: 1.4rem 1.6rem;
+  border-radius: var(--radius);
+  background: var(--card-gradient);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.guide-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--card-hover-border);
+}
+
+.guide-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.8rem;
+}
+
+.guide-icon-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(225, 29, 72, 0.3) 0%, rgba(190, 18, 60, 0.15) 100%);
+  border: 1px solid rgba(251, 113, 133, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fb7185;
+  flex-shrink: 0;
+}
+
+.guide-icon-badge svg {
+  width: 20px;
+  height: 20px;
+}
+
+.guide-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.guide-card ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+  color: #fecdd3;
+}
+
+.guide-card ul li {
+  margin-bottom: 0.45rem;
+  line-height: 1.5;
+}
+
+.guide-card ul li strong {
+  color: #ffffff;
+}
+
+.card-danger-alert {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.25) 0%, rgba(153, 27, 27, 0.2) 100%);
+  border: 1px solid rgba(248, 113, 133, 0.4);
+  box-shadow: 0 12px 30px rgba(220, 38, 38, 0.25);
+}
+
+.card-danger-alert .guide-icon-badge {
+  background: rgba(220, 38, 38, 0.4);
+  border-color: rgba(248, 113, 113, 0.6);
+  color: #fff;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
