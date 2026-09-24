@@ -648,15 +648,15 @@ legend {
   font-weight: 600;
 }
 
-/* Medium Flow: Warm Coral Rose / Light Crimson */
+/* Medium Flow: Rich Warm Brown / Amber */
 .chip-flow.flow-medium input[type="radio"] {
-  accent-color: #f43f5e;
+  accent-color: #d97706;
 }
 .chip-flow.flow-medium:has(input:checked) {
-  background: linear-gradient(135deg, rgba(244, 63, 94, 0.25) 0%, rgba(225, 29, 72, 0.18) 100%);
-  border-color: #f43f5e;
-  box-shadow: 0 4px 16px rgba(244, 63, 94, 0.35);
-  color: #fff1f2;
+  background: linear-gradient(135deg, rgba(217, 119, 6, 0.28) 0%, rgba(180, 83, 9, 0.2) 100%);
+  border-color: #d97706;
+  box-shadow: 0 4px 16px rgba(217, 119, 6, 0.38);
+  color: #fef3c7;
   font-weight: 600;
 }
 
