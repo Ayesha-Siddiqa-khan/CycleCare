@@ -21,13 +21,17 @@ resource "aws_iam_role" "github_actions_oidc" {
         }
         Action = "sts:AssumeRoleWithWebIdentity"
         Condition = {
-          StringEquals = {
-            "token.actions.githubusercontent.com:aud" = var.github_oidc_audience
-          }
           StringLike = {
             "token.actions.githubusercontent.com:sub" = [
-              "repo:${var.github_repository != "" ? var.github_repository : "Ayesha-Siddiqa-khan/CycleCare"}:ref:refs/heads/*",
-              "repo:${var.github_repository != "" ? var.github_repository : "Ayesha-Siddiqa-khan/CycleCare"}:*"
+              "repo:Ayesha-Siddiqa-khan/CycleCare:*",
+              "repo:ayesha-siddiqa-khan/cyclecare:*",
+              "repo:Ayesha-Siddiqa-khan/*",
+              "repo:ayesha-siddiqa-khan/*"
+            ],
+            "token.actions.githubusercontent.com:aud" = [
+              "sts.amazonaws.com",
+              "https://github.com/Ayesha-Siddiqa-khan",
+              "https://github.com/ayesha-siddiqa-khan"
             ]
           }
         }
